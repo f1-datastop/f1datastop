@@ -110,6 +110,12 @@ Cards, empty/error/loading, `Dialog` (focus trap, Esc, labelled), `Tabs`, tables
   and `/version.json` show the version and SHA.
 - Supabase MCP (if available): `https://mcp.supabase.com/mcp`.
 
+## Cursor Cloud specific instructions
+
+- Dev server: `npm run dev` from the repo root (Vite, port 8080). Pass no extra flags. The root script is `npm --prefix web run dev`, so `--host` and `--port` never reach Vite. The Vite config already binds all interfaces on 8080.
+- Supabase keys are optional for local UI work. With no `web/.env.local`, the app warns once and, in development, reads Jolpica and OpenF1 through `/api/ergast` and `/api/openf1`. Dashboard, standings, the calendar list, and driver profiles load this way. `getCircuitDetail` returns null without `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`, so a circuit page stays on the loading skeleton.
+- Python checks use `analysis/.venv` (this image is Python 3.12; CI uses 3.11). From the repo root: `cd analysis && .venv/bin/python -m unittest discover -s tests`. Docs check: `npm --prefix docs run check`.
+
 ## License
 
 MIT — see LICENSE. No copyright infringement intended: Formula 1 marks belong to their
